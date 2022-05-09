@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class gitTest extends StatelessWidget {
-  const gitTest({Key? key}) : super(key: key);
+class gitTest3ash extends StatelessWidget {
+  const gitTest3ash({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
