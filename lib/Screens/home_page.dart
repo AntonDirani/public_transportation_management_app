@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pub_transport_01/Screens/welcome_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -38,7 +39,7 @@ class HomePage extends StatelessWidget {
                   ),
                   Text(
                     'تطبيق إدارة و تنظيم حركة المواصلات العامة ضمن مدينة دمشق ',
-                    style: TextStyle(
+                    style: GoogleFonts.cairo(
                       color: Colors.white,
                       fontSize: 28,
                     ),
@@ -49,14 +50,13 @@ class HomePage extends StatelessWidget {
                     width: double.infinity,
                   ),
                   MaterialButton(
-                    highlightElevation: 0,
-                    elevation: 0,
+
                     minWidth: double.infinity,
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50)),
+                        borderRadius: BorderRadius.circular(20)),
                     height: MediaQuery.of(context).size.height / 13,
-                    child: Text('Start Now'),
+                    child: Text('Start Now' ,style: TextStyle(fontSize: 22),),
                     onPressed: () {
                       Navigator.pushNamed(context, welcome.id);
                     },

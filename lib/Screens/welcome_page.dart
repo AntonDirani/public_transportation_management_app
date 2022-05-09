@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pub_transport_01/Screens/sign_up_page.dart';
 
 //Sh8aleh w alnabi
 
@@ -35,41 +36,44 @@ class _welcomeState extends State<welcome> {
   bool isPasswordVisible = true;
   String password = '';
   Widget build(BuildContext context) {
+    var MediaHeight= MediaQuery.of(context).size.height ;
+    var MediaWidth= MediaQuery.of(context).size.width;
     return Material(
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
         ),
         child: Padding(
-          padding: EdgeInsets.only(top: 130, left: 30, right: 30),
+          padding: EdgeInsets.only(top: MediaHeight * 0.1, left: MediaWidth * 0.07, right: MediaWidth * 0.07),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: MediaQuery.of(context).size.height / 5,
-                width: MediaQuery.of(context).size.width / 2,
+                height:MediaHeight / 4,
+                width: MediaWidth / 1.5,
                 decoration: BoxDecoration(
                     image:
                         DecorationImage(image: AssetImage('assets/Logo.png'))),
               ),
               SizedBox(
-                height: 20,
+                height: MediaHeight * 0.02,
               ),
               Text(
                 'Welcome To Harakeh',
-                style: GoogleFonts.teko(color: Colors.black, fontSize: 50),
+                style: GoogleFonts.montserrat(color: Colors.black, fontSize: 35 , fontWeight: FontWeight.bold),
               ),
+              SizedBox(height: MediaHeight * 0.01,),
               Text(
                 'Getting Startd',
-                style: GoogleFonts.alef(color: Colors.black, fontSize: 20),
+                style: GoogleFonts.montserrat(color: Colors.black, fontSize: 20),
               ),
               SizedBox(
-                height: 30,
+                height: MediaHeight *0.03,
               ),
               TextField(
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                       borderSide:
                           BorderSide(width: 2, color: Color(0xff33C58E))),
                   labelText: 'Email or Phone Number',
@@ -78,18 +82,20 @@ class _welcomeState extends State<welcome> {
                     Icons.mail,
                     color: Color(0xff33C58E),
                   ),
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
                 ),
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.done,
               ),
               SizedBox(
-                height: 30,
+                height: MediaHeight * 0.03,
               ),
               TextField(
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                       borderSide:
                           BorderSide(width: 2, color: Color(0xff33C58E))),
                   labelText: 'Passwprd',
@@ -111,24 +117,24 @@ class _welcomeState extends State<welcome> {
                     Icons.lock,
                     color: Color(0xff33C58E),
                   ),
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
                 ),
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.done,
                 obscureText: isPasswordVisible,
               ),
+
+              // MaterialButton(
+              //   child: Text(
+              //     'Forgot Password ?',
+              //     style: TextStyle(color: Colors.red),
+              //   ),
+              //   onPressed: () {},
+              // ),
               SizedBox(
-                height: 5,
-              ),
-              MaterialButton(
-                child: Text(
-                  'Forgot Password ?',
-                  style: TextStyle(color: Colors.red),
-                ),
-                onPressed: () {},
-              ),
-              SizedBox(
-                height: 5,
+                height: MediaHeight* 0.05,
               ),
               MaterialButton(
                 minWidth: double.infinity,
@@ -159,7 +165,9 @@ class _welcomeState extends State<welcome> {
                       'Sign Up Here',
                       style: TextStyle(color: Colors.red),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, signUp.id);
+                    },
                   ),
                 ],
               )
