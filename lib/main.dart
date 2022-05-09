@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pub_transport_01/Screens/sign_up_page.dart';
+import 'package:pub_transport_01/Screens/trip_planner.dart';
 import 'package:pub_transport_01/Screens/welcome_page.dart';
 import 'Screens/home_page.dart';
 import 'Screens/welcome_page.dart';
@@ -10,11 +11,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       home: HomePage(),
       routes: {
         welcome.id: (context) => welcome(),
         signUp.id: (context) => signUp(),
+        TripPlanner.id: (context) => TripPlanner()
       },
     );
   }

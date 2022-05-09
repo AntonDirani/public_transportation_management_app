@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pub_transport_01/Screens/trip_planner.dart';
 import 'package:pub_transport_01/Screens/welcome_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -26,6 +27,7 @@ class HomePage extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.fromLTRB(35, 60, 35, 40),
             child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
@@ -35,7 +37,7 @@ class HomePage extends StatelessWidget {
                             image: AssetImage('assets/LogoWhite.png'))),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 10,
+                    height: MediaQuery.of(context).size.height / 14,
                   ),
                   Text(
                     'تطبيق إدارة و تنظيم حركة المواصلات العامة ضمن مدينة دمشق ',
@@ -46,21 +48,36 @@ class HomePage extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 5,
+                    height: MediaQuery.of(context).size.height / 12,
                     width: double.infinity,
                   ),
                   MaterialButton(
-
                     minWidth: double.infinity,
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
-                    height: MediaQuery.of(context).size.height / 13,
-                    child: Text('Start Now' ,style: TextStyle(fontSize: 22),),
+                    height: MediaQuery.of(context).size.height / 12,
+                    child: Text(
+                      'Start Now',
+                      style: TextStyle(fontSize: 22),
+                    ),
                     onPressed: () {
                       Navigator.pushNamed(context, welcome.id);
                     },
-                  )
+                  ),
+                  MaterialButton(
+                      minWidth: double.infinity,
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      height: MediaQuery.of(context).size.height / 20,
+                      child: Text(
+                        'test',
+                        style: TextStyle(fontSize: 22),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, TripPlanner.id);
+                      })
                 ]),
           ),
         ));
