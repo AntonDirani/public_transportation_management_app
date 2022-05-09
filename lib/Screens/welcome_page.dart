@@ -60,9 +60,11 @@ class _welcomeState extends State<welcome> {
               ),
               Text(
                 'Welcome To Harakeh',
-                style: GoogleFonts.montserrat(color: Colors.black, fontSize: 35 , fontWeight: FontWeight.bold),
+                style: GoogleFonts.montserrat(color: Colors.black, fontSize: 35 , fontWeight: FontWeight.w600),
               ),
-              SizedBox(height: MediaHeight * 0.01,),
+              SizedBox(
+                height: MediaHeight * 0.01,
+              ),
               Text(
                 'Getting Startd',
                 style: GoogleFonts.montserrat(color: Colors.black, fontSize: 20),
@@ -76,7 +78,7 @@ class _welcomeState extends State<welcome> {
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                       borderSide:
                           BorderSide(width: 2, color: Color(0xff33C58E))),
-                  labelText: 'Email or Phone Number',
+                  labelText: 'Email',
                   labelStyle: TextStyle(color: Colors.black),
                   prefixIcon: Icon(
                     Icons.mail,
@@ -125,7 +127,6 @@ class _welcomeState extends State<welcome> {
                 textInputAction: TextInputAction.done,
                 obscureText: isPasswordVisible,
               ),
-
               // MaterialButton(
               //   child: Text(
               //     'Forgot Password ?',
