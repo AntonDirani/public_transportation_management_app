@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+//Sh8aleh w alnabi
+
 class welcome_page extends StatefulWidget {
   const welcome_page({Key? key}) : super(key: key);
 
