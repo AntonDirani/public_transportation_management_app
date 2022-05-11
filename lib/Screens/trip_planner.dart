@@ -7,16 +7,18 @@ class TripPlanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF00D59C),
       appBar: NewGradientAppBar(
+          //backgroundColor: Color(0xFF00D3A0),
           elevation: 0,
           title: Text('Trip planner'),
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               stops: [
-                0.01,
-                0.35,
-                0.9
+                0.02,
+                0.5,
+                0.99
               ],
               colors: [
                 Color(0xFF276174),
@@ -65,6 +67,13 @@ class LocationSelector extends StatelessWidget {
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
                             color: Colors.grey),
+                      ),
+                      Text(
+                        'From',
+                        style: GoogleFonts.montserrat(
+                            fontSize: 28,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black),
                       ),
                     ],
                   )
