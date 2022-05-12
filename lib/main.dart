@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pub_transport_01/Screens/my_google_map.dart';
 import 'package:pub_transport_01/Screens/sign_up_page.dart';
 import 'package:pub_transport_01/Screens/welcome_page.dart';
 import 'Screens/home_page.dart';
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
       routes: {
         welcome.id: (context) => welcome(),
         signUp.id: (context) => signUp(),
-        TripPlanner.id: (context) => TripPlanner()
+        TripPlanner.id: (context) => TripPlanner(),
+        MyMap.id: (context) => MyMap()
       },
     );
   }

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:pub_transport_01/Components/constants.dart';
+import 'package:pub_transport_01/Screens/my_google_map.dart';
 
 class TripPlanner extends StatelessWidget {
   static String id = 'trip_planner';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MyDrawer(),
       backgroundColor: mainColor,
       appBar: NewGradientAppBar(
           centerTitle: true,
@@ -46,6 +48,51 @@ class TripPlanner extends StatelessWidget {
               width: double.infinity,
             ),
           )
+        ],
+      ),
+    );
+  }
+}
+
+class MyDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var mediaSize = MediaQuery.of(context).size;
+
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          DrawerHeader(
+            child: Container(
+              height: mediaSize.height / 4,
+              width: mediaSize.width / 2,
+              decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage('assets/Logo.png'))),
+            ),
+          ),
+          ListTile(
+            subtitle: Text('Open Google Maps'),
+            leading: Icon(
+              Icons.map,
+              size: mediaSize.width / 11,
+              color: mainColor,
+            ),
+            title: Text(
+              'Map',
+              style: GoogleFonts.montserrat(
+                  fontSize: 18, fontWeight: FontWeight.w500),
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, MyMap.id);
+            },
+          ),
+          ListTile(
+            title: const Text('Item 2'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
         ],
       ),
     );
