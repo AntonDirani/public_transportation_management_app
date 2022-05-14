@@ -12,12 +12,71 @@ class MyMap extends StatefulWidget {
 }
 
 class _MyMapState extends State<MyMap> {
+  @override
+  void initState() {
+    super.initState();
+    setMarker();
+  }
+
+  late BitmapDescriptor markerbitmap;
+
+  void setMarker() async {
+    markerbitmap = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(size: Size(12, 12)),
+      'assets/marker.png',
+    );
+  }
+
   var initialCameraPosition = CameraPosition(
       target: LatLng(
         33.5138140330628,
         36.31543211698057,
       ),
-      zoom: 15);
+      zoom: 14.2);
+
+  Set<Marker> _markers = {};
+
+  void _onMapCreate(GoogleMapController controller) {
+    setState(() {
+      _markers.add(
+        Marker(
+          icon: markerbitmap,
+          markerId: MarkerId('0'),
+          position: LatLng(33.51380897904905, 36.31589383497151),
+        ),
+      );
+      _markers.add(
+        Marker(
+          icon:
+              BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow),
+          markerId: MarkerId('1'),
+          position: LatLng(33.50918623023591, 36.31814665426697),
+        ),
+      );
+      _markers.add(
+        Marker(
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRose),
+          markerId: MarkerId('2'),
+          position: LatLng(33.518291560995664, 36.31207436842789),
+        ),
+      );
+      _markers.add(
+        Marker(
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+          markerId: MarkerId('3'),
+          position: LatLng(33.51997836180592, 36.300852817269835),
+        ),
+      );
+      _markers.add(
+        Marker(
+          icon:
+              BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+          markerId: MarkerId('4'),
+          position: LatLng(33.52363263282213, 36.31847255041357),
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +98,13 @@ class _MyMapState extends State<MyMap> {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              /*stops: [
-                0.02,
-                0.5,
-              ],*/
               colors: [
                 Color(0xFF2c8e82),
                 Color(0xFF42dc8f),
               ])),
       body: GoogleMap(
+        onMapCreated: _onMapCreate,
+        markers: _markers,
         initialCameraPosition: initialCameraPosition,
       ),
     );
