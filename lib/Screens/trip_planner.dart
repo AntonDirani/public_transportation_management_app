@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:pub_transport_01/Components/constants.dart';
+import 'package:pub_transport_01/Components/dropdown_list.dart';
 import 'package:pub_transport_01/Screens/my_google_map.dart';
 
 class TripPlanner extends StatelessWidget {
@@ -120,9 +121,9 @@ class LocationSelector extends StatelessWidget {
                             height: 15,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.blue.withOpacity(.3),
-                              border:
-                                  Border.all(color: Colors.blue, width: 3.0),
+                              color: Colors.lightBlue.withOpacity(.3),
+                              border: Border.all(
+                                  color: Colors.lightBlue, width: 3.0),
                             )),
                         SizedBox(
                           width: 15,
@@ -137,8 +138,10 @@ class LocationSelector extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                   color: Colors.grey),
                             ),
-                            GestureDetector(
+                            DropDownPlaces('Choose your location')
+                            /*GestureDetector(
                               onTap: () {},
+
                               child: Text(
                                 'Choose your location',
                                 style: GoogleFonts.montserrat(
@@ -146,14 +149,14 @@ class LocationSelector extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                     color: Colors.grey[850]),
                               ),
-                            ),
+                            ),*/
                           ],
                         ),
                         Spacer(),
                         Icon(
                           Icons.my_location,
                           color: Colors.grey[850],
-                        )
+                        ),
                       ],
                     ),
                     const Divider(
@@ -185,7 +188,8 @@ class LocationSelector extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                   color: Colors.grey),
                             ),
-                            GestureDetector(
+                            DropDownPlaces('Choose your location'),
+                            /*GestureDetector(
                               onTap: () {
                                 print('dest');
                               },
@@ -196,7 +200,7 @@ class LocationSelector extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                     color: Colors.grey[850]),
                               ),
-                            ),
+                            ),*/
                           ],
                         ),
                         Spacer(),
