@@ -18,11 +18,11 @@ class _MyMapState extends State<MyMap> {
     setMarker();
   }
 
-  late BitmapDescriptor markerbitmap;
+  late BitmapDescriptor customMarker;
 
   void setMarker() async {
-    markerbitmap = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(size: Size(12, 12)),
+    customMarker = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(),
       'assets/marker.png',
     );
   }
@@ -40,39 +40,54 @@ class _MyMapState extends State<MyMap> {
     setState(() {
       _markers.add(
         Marker(
-          icon: markerbitmap,
+          icon: customMarker,
+          infoWindow:
+              InfoWindow(title: 'محطة باب توما', snippet: 'Bab Touma Station'),
           markerId: MarkerId('0'),
           position: LatLng(33.51380897904905, 36.31589383497151),
         ),
       );
+      _markers.add(Marker(
+        icon: customMarker,
+        infoWindow:
+            InfoWindow(title: 'محطة باب شرقي', snippet: 'Bab Sharqi Station'),
+        markerId: MarkerId('1'),
+        position: LatLng(33.50918623023591, 36.31814665426697),
+      ));
       _markers.add(
         Marker(
-          icon:
-              BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow),
-          markerId: MarkerId('1'),
-          position: LatLng(33.50918623023591, 36.31814665426697),
-        ),
-      );
-      _markers.add(
-        Marker(
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRose),
+          icon: customMarker,
+          infoWindow: InfoWindow(
+              title: 'محطة ساحة التحرير', snippet: 'Tahrir Square Station'),
           markerId: MarkerId('2'),
           position: LatLng(33.518291560995664, 36.31207436842789),
         ),
       );
       _markers.add(
         Marker(
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+          icon: customMarker,
+          infoWindow: InfoWindow(
+              title: 'محطة شارع بغداد', snippet: 'Baghdad Ave Station'),
           markerId: MarkerId('3'),
           position: LatLng(33.51997836180592, 36.300852817269835),
         ),
       );
       _markers.add(
         Marker(
-          icon:
-              BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+          icon: customMarker,
+          infoWindow: InfoWindow(
+              title: 'محطة العباسيين', snippet: 'Abbassiyyin Square Station'),
           markerId: MarkerId('4'),
           position: LatLng(33.52363263282213, 36.31847255041357),
+        ),
+      );
+      _markers.add(
+        Marker(
+          icon: customMarker,
+          infoWindow:
+              InfoWindow(title: 'محطة الزبلطاني', snippet: 'Zablatani Station'),
+          markerId: MarkerId('5'),
+          position: LatLng(33.51694168672946, 36.32042731856238),
         ),
       );
     });
@@ -109,4 +124,17 @@ class _MyMapState extends State<MyMap> {
       ),
     );
   }
+  /* Future<void> _goToPlace(
+       Map<String, dynamic> place,
+      ) async {
+     final double lat = place['geometry']['location']['lat'];
+     final double lng = place['geometry']['location']['lng'];
+
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(target: LatLng(lat, lng), zoom: 12),
+      ),
+    );
+}*/
 }
