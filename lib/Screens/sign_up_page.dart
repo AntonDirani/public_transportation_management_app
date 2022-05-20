@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:pub_transport_01/validation/signup_validation.dart';
+import 'package:pub_transport_01/validation/validation_item.dart';
 
 class sign_up_page extends StatefulWidget {
   const sign_up_page({Key? key}) : super(key: key);
@@ -33,6 +36,7 @@ class _signUpState extends State<signUp> {
   Widget build(BuildContext context) {
     var MediaHeight = MediaQuery.of(context).size.height;
     var MediaWidth = MediaQuery.of(context).size.width;
+    final validationServices = Provider.of<signupValidation>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -80,6 +84,7 @@ class _signUpState extends State<signUp> {
                           borderSide:
                               BorderSide(width: 2, color: Color(0xff33C58E))),
                       labelText: 'Name',
+                      errorText: validationServices.name.error,
                       labelStyle: TextStyle(color: Colors.black),
                       prefixIcon: Icon(
                         Icons.account_circle,
@@ -89,6 +94,9 @@ class _signUpState extends State<signUp> {
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
                     ),
+                    onChanged: (String value) {
+                      validationServices.changeName(value);
+                    },
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.done,
                   ),
@@ -102,6 +110,7 @@ class _signUpState extends State<signUp> {
                           borderSide:
                               BorderSide(width: 2, color: Color(0xff33C58E))),
                       labelText: 'Email',
+                      errorText: validationServices.email.error,
                       labelStyle: TextStyle(color: Colors.black),
                       prefixIcon: Icon(
                         Icons.email,
@@ -111,6 +120,9 @@ class _signUpState extends State<signUp> {
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
                     ),
+                    onChanged: (String value) {
+                      validationServices.changeEmail(value);
+                    },
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.done,
                   ),
@@ -124,6 +136,7 @@ class _signUpState extends State<signUp> {
                           borderSide:
                               BorderSide(width: 2, color: Color(0xff33C58E))),
                       labelText: 'Password',
+                      errorText: validationServices.passeord.error,
                       labelStyle: TextStyle(color: Colors.black),
                       prefixIcon: Icon(
                         Icons.lock,
@@ -133,6 +146,9 @@ class _signUpState extends State<signUp> {
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
                     ),
+                    onChanged: (String value) {
+                      validationServices.changePassword(value);
+                    },
                     textInputAction: TextInputAction.done,
                   ),
                   SizedBox(
@@ -145,6 +161,7 @@ class _signUpState extends State<signUp> {
                           borderSide:
                               BorderSide(width: 2, color: Color(0xff33C58E))),
                       labelText: 'Confrim Password',
+                      errorText: validationServices.confrimPasseord.error,
                       labelStyle: TextStyle(color: Colors.black),
                       prefixIcon: Icon(
                         Icons.lock,
@@ -154,6 +171,9 @@ class _signUpState extends State<signUp> {
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
                     ),
+                    onChanged: (String value) {
+                      validationServices.checkConfrimPassword(value);
+                    },
                     textInputAction: TextInputAction.done,
                   ),
                   SizedBox(
@@ -166,6 +186,7 @@ class _signUpState extends State<signUp> {
                           borderSide:
                               BorderSide(width: 2, color: Color(0xff33C58E))),
                       labelText: 'National Number',
+                      errorText: validationServices.nationalNumber.error,
                       labelStyle: TextStyle(color: Colors.black),
                       prefixIcon: Icon(
                         Icons.numbers,
@@ -175,25 +196,29 @@ class _signUpState extends State<signUp> {
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
                     ),
+                    onChanged: (String value) {
+                      validationServices.changeNationalnumber(value);
+                    },
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.done,
                   ),
                   SizedBox(
                     height: MediaHeight * 0.03,
                   ),
-                  MaterialButton(
-                    minWidth: double.infinity,
-                    color: Color(0xff33C58E),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    height: MediaQuery.of(context).size.height / 12,
-                    child: Text(
-                      'Sign Up',
-                      style: TextStyle(fontSize: 22, color: Colors.white),
+                  SizedBox(
+                    height: MediaHeight / 11,
+                    width: double.infinity,
+                    child: RaisedButton(
+
+                      color: Color(0xff33C58E),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Text(
+                        'Sign Up',
+                        style: TextStyle(fontSize: 22, color: Colors.white),
+                      ),
+                      onPressed: (!validationServices.isValid) ? null : validationServices.SubmitData,
                     ),
-                    onPressed: () {
-                      //Navigator.pushNamed(context, welcome.id);
-                    },
                   ),
                 ],
               ),

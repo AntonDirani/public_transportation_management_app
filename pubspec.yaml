@@ -38,6 +38,7 @@ dependencies:
   google_fonts: ^2.3.2
   new_gradient_app_bar: ^0.2.0
   provider: ^6.0.2
+  email_validator: ^2.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
