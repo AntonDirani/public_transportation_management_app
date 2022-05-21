@@ -16,13 +16,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider (create: (context) => signupValidation(),),
-        ChangeNotifierProvider (create: (context) => signinValidation(),)
+        ChangeNotifierProvider(
+          create: (context) => signupValidation(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => signinValidation(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: welcome(),
+        home: HomePage(),
         routes: {
+          HomePage.id: (context) => HomePage(),
           welcome.id: (context) => welcome(),
           signUp.id: (context) => signUp(),
           TripPlanner.id: (context) => TripPlanner(),

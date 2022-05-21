@@ -4,6 +4,8 @@ import 'package:pub_transport_01/Screens/trip_planner.dart';
 import 'package:pub_transport_01/Screens/welcome_page.dart';
 
 class HomePage extends StatelessWidget {
+  static String id = 'home_page';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
