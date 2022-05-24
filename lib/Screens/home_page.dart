@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pub_transport_01/Screens/trip_planner.dart';
+
 import 'package:pub_transport_01/Screens/welcome_page.dart';
+
+import 'trips.dart';
 
 class HomePage extends StatelessWidget {
   static String id = 'home_page';
@@ -78,7 +80,7 @@ class HomePage extends StatelessWidget {
                         style: TextStyle(fontSize: 22),
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, TripPlanner.id);
+                        Navigator.pushNamed(context, Trips.id);
                       })
                 ]),
           ),
