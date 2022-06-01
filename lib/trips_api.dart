@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pub_transport_01/station_model.dart';
+import 'package:pub_transport_01/Models/station_model.dart';
 
-import 'trips_model.dart';
+import 'Models/trips_model.dart';
 
 class TripsAPI extends ChangeNotifier {
   List<Trip> Trips = [

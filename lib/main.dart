@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:pub_transport_01/Screens/add_trip_details.dart';
+import 'package:pub_transport_01/Screens/add_trip.dart';
 import 'package:pub_transport_01/Screens/my_google_map.dart';
 import 'package:pub_transport_01/Screens/sign_up_page.dart';
 import 'package:pub_transport_01/Screens/trip_details.dart';
@@ -26,12 +28,15 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => signinValidation(),
-        )
+        ),
+
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        home: add_trip(),
         routes: {
+          add_trip_details.id: (context)=> add_trip_details(),
+          add_trip.id:(context)=> add_trip(),
           HomePage.id: (context) => HomePage(),
           welcome.id: (context) => welcome(),
           signUp.id: (context) => signUp(),
