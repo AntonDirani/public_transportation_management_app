@@ -29,14 +29,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => signinValidation(),
         ),
-
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: add_trip(),
+        home: HomePage(),
         routes: {
-          add_trip_details.id: (context)=> add_trip_details(),
-          add_trip.id:(context)=> add_trip(),
+          add_trip_details.id: (context) => add_trip_details(),
+          add_trip.id: (context) => add_trip(),
           HomePage.id: (context) => HomePage(),
           welcome.id: (context) => welcome(),
           signUp.id: (context) => signUp(),

@@ -61,7 +61,7 @@ class _TripsBodyState extends State<TripsBody> {
 
   @override
   Widget build(BuildContext context1) {
-    return Column (
+    return Column(
       children: [
         //SearchBar(),
         Expanded(
@@ -78,7 +78,7 @@ class _TripsBodyState extends State<TripsBody> {
 }
 
 Widget buildTrip(Trip trip, BuildContext context) {
-  return ListTile (
+  return ListTile(
       leading: Image.asset(
         'assets/bus.png',
         fit: BoxFit.cover,
@@ -86,8 +86,7 @@ Widget buildTrip(Trip trip, BuildContext context) {
         height: 40,
       ),
       title: Text(
-        '',
-       // trip.name,
+        trip.name!,
         style: GoogleFonts.montserrat(fontWeight: FontWeight.w500),
       ),
       subtitle: Text('Click to see details'),
