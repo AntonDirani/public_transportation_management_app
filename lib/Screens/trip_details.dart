@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../Models/trips_model.dart';
-import '../trips_api.dart';
+import '../API/trips_api.dart';
 
 class TripDetails extends StatelessWidget {
   final int index;
@@ -15,6 +15,8 @@ class TripDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime datetime = DateTime.now();
+    String datetime3 = DateFormat.yMMMMEEEEd().format(datetime);
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -32,6 +34,12 @@ class TripDetails extends StatelessWidget {
         backgroundColor: Colors.transparent,
         // extendBodyBehindAppBar: true,
         appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.keyboard_arrow_left),
+          ),
           centerTitle: true,
           title: Text(
             'Trips',
@@ -43,7 +51,15 @@ class TripDetails extends StatelessWidget {
         body: Column(
           children: [
             SizedBox(
-              height: 50,
+              height: 15,
+            ),
+            Text('$datetime3',
+                style: GoogleFonts.montserrat(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w500)),
+            SizedBox(
+              height: 20,
             ),
             Expanded(
               child: Stack(

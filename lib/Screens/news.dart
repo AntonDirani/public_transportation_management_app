@@ -3,20 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:pub_transport_01/API/news_api.dart';
+import 'package:pub_transport_01/Components/constants.dart';
 import 'package:pub_transport_01/Components/my_drawer.dart';
-import 'package:pub_transport_01/Screens/trip_details.dart';
-import 'package:pub_transport_01/Models/trips_model.dart';
 import '../Components/search_bar.dart';
-import '../API/trips_api.dart';
+import 'package:pub_transport_01/Models/news_model.dart';
 
-class Trips extends StatefulWidget {
-  static String id = 'trips';
+import 'news_details.dart';
+
+class NewsScreen extends StatefulWidget {
+  static String id = 'newsScreen';
 
   @override
-  State<Trips> createState() => TripsState();
+  State<NewsScreen> createState() => NewsScreenState();
 }
 
-class TripsState extends State<Trips> {
+class NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +28,7 @@ class TripsState extends State<Trips> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Trips',
+          'My News',
           style: GoogleFonts.montserrat(fontWeight: FontWeight.w500),
         ),
         backgroundColor: Colors.transparent,
@@ -49,25 +51,25 @@ class TripsState extends State<Trips> {
                   Color(0xFF42dc8f),
                 ])),*/
       ,
-      body: TripsBody(),
+      body: NewsBody(),
     );
   }
 }
 
-class TripsBody extends StatefulWidget {
+class NewsBody extends StatefulWidget {
   @override
-  State<TripsBody> createState() => _TripsBodyState();
+  State<NewsBody> createState() => _NewsBodyState();
 }
 
-class _TripsBodyState extends State<TripsBody> {
-  late List<Trip> trips;
+class _NewsBodyState extends State<NewsBody> {
+  late List<News> news = [];
   String query = '';
 
   @override
   void initState() {
     super.initState();
 
-    trips = Provider.of<TripsAPI>(context, listen: false).allTrips;
+    news = Provider.of<NewsAPI>(context, listen: false).allNews;
   }
 
   @override
@@ -114,10 +116,10 @@ class _TripsBodyState extends State<TripsBody> {
             removeTop: true,
             child: ListView.builder(
               //shrinkWrap: true,
-              itemCount: trips.length,
+              itemCount: news.length,
               itemBuilder: (context, index) {
-                final trip = trips[index];
-                return buildTrip(trip, context1, index);
+                final news1 = news[index];
+                return buildNews(news1, context1, index);
               },
             ),
           ),
@@ -128,14 +130,14 @@ class _TripsBodyState extends State<TripsBody> {
 
   Widget SearchBar() => SearchWidget(
         text: query,
-        hintText: 'Search for a trip..',
-        onChanged: searchTrip,
+        hintText: 'Search for a news..',
+        onChanged: searchNews,
       );
 
-  void searchTrip(String query) {
-    final trips =
-        Provider.of<TripsAPI>(context, listen: false).allTrips.where((trip) {
-      final nameLower = trip.name?.toLowerCase();
+  void searchNews(String query) {
+    final news =
+        Provider.of<NewsAPI>(context, listen: false).allNews.where((news) {
+      final nameLower = news.head?.toLowerCase();
       final searchLower = query.toLowerCase();
 
       return nameLower!.contains(searchLower);
@@ -143,28 +145,29 @@ class _TripsBodyState extends State<TripsBody> {
 
     setState(() {
       this.query = query;
-      this.trips = trips;
+      this.news = news;
     });
   }
 
-  Widget buildTrip(Trip trip, BuildContext context, int index) {
+  Widget buildNews(News news, BuildContext context, int index) {
     return ListTile(
         leading: SvgPicture.asset(
-          'assets/route_icon.svg',
+          'assets/newsIcon.svg',
+          color: mainColor,
           fit: BoxFit.cover,
-          width: 40,
-          height: 40,
+          width: 50,
+          height: 50,
         ),
         title: Text(
-          trip.name!,
+          news.head!,
           style: GoogleFonts.montserrat(fontWeight: FontWeight.w500),
         ),
         subtitle: Text('Click to see details'),
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return TripDetails(
+            return NewsDetails(
               index: index,
-              trip: trip,
+              news: news,
             );
           }));
         });

@@ -1,20 +1,18 @@
-import 'package:flutter/foundation.dart';
-import 'package:provider/provider.dart';
 import 'package:pub_transport_01/Models/station_model.dart';
 
-class Trip extends ChangeNotifier {
-   int? id;
-   String? name;
-   int? numBus;
+class Trip {
+  int? id;
+  String? name;
+  int? numBus;
   List<Station>? stations;
-   int? numStations;
+  int? numStations;
   List<int>? buses;
 
-  Trip (
-      { this.name,
-       this.id,
-       this.buses,
-       this.numBus,
-       this.numStations,
-       this.stations});
+  Trip(
+      {this.name,
+      this.id,
+      this.buses,
+      this.numBus,
+      this.numStations,
+      this.stations});
 }

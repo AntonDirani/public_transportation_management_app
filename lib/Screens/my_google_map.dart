@@ -103,6 +103,12 @@ class _MyMapState extends State<MyMap> {
         child: Icon(Icons.location_searching),
       ),
       appBar: NewGradientAppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.keyboard_arrow_left),
+          ),
           centerTitle: true,
           //backgroundColor: Color(0xFF00D3A0),
           elevation: 0,

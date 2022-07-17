@@ -23,6 +23,9 @@ dependencies:
   new_gradient_app_bar: ^0.2.0
   provider: ^6.0.2
   email_validator: ^2.0.1
+  flutter_svg: ^1.0.3
+  intl: ^0.17.0
+  mirai_dropdown_menu: ^0.0.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
