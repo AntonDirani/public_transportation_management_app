@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:pub_transport_01/Screens/sign_up_page.dart';
+import 'package:pub_transport_01/Screens/sign_up.dart';
 import 'package:pub_transport_01/validation/signin_validation.dart';
-import 'package:pub_transport_01/validation/signup_validation.dart';
-import 'package:pub_transport_01/validation/validation_item.dart';
 
-//Sh8aleh w alnabi
-
-class welcome_page extends StatefulWidget {
-  const welcome_page({Key? key}) : super(key: key);
+class SignIn extends StatefulWidget {
+  const SignIn({Key? key}) : super(key: key);
 
   @override
-  State<welcome_page> createState() => _welcome_pageState();
+  State<SignIn> createState() => _SignInState();
 }
 
-class _welcome_pageState extends State<welcome_page> {
+class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -40,8 +36,8 @@ class _welcomeState extends State<welcome> {
   bool isPasswordVisible = true;
   String password = '';
   Widget build(BuildContext context) {
-    var MediaHeight= MediaQuery.of(context).size.height ;
-    var MediaWidth= MediaQuery.of(context).size.width;
+    var MediaHeight = MediaQuery.of(context).size.height;
+    var MediaWidth = MediaQuery.of(context).size.width;
     final validationServices = Provider.of<signinValidation>(context);
 
     return Material(
@@ -50,12 +46,15 @@ class _welcomeState extends State<welcome> {
           color: Colors.white,
         ),
         child: Padding(
-          padding: EdgeInsets.only(top: MediaHeight * 0.1, left: MediaWidth * 0.07, right: MediaWidth * 0.07),
+          padding: EdgeInsets.only(
+              top: MediaHeight * 0.1,
+              left: MediaWidth * 0.07,
+              right: MediaWidth * 0.07),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height:MediaHeight / 4,
+                height: MediaHeight / 4,
                 width: MediaWidth / 1.5,
                 decoration: BoxDecoration(
                     image:
@@ -66,17 +65,21 @@ class _welcomeState extends State<welcome> {
               ),
               Text(
                 'Welcome To Harakeh',
-                style: GoogleFonts.montserrat(color: Colors.black, fontSize: 35 , fontWeight: FontWeight.w600),
+                style: GoogleFonts.montserrat(
+                    color: Colors.black,
+                    fontSize: 35,
+                    fontWeight: FontWeight.w600),
               ),
               SizedBox(
                 height: MediaHeight * 0.01,
               ),
               Text(
                 'Getting Startd',
-                style: GoogleFonts.montserrat(color: Colors.black, fontSize: 20),
+                style:
+                    GoogleFonts.montserrat(color: Colors.black, fontSize: 20),
               ),
               SizedBox(
-                height: MediaHeight *0.03,
+                height: MediaHeight * 0.03,
               ),
               TextField(
                 decoration: InputDecoration(
@@ -95,7 +98,7 @@ class _welcomeState extends State<welcome> {
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
                 ),
-                onChanged: (String value){
+                onChanged: (String value) {
                   validationServices.changeEmail(value);
                 },
                 keyboardType: TextInputType.emailAddress,
@@ -149,7 +152,7 @@ class _welcomeState extends State<welcome> {
               //   onPressed: () {},
               // ),
               SizedBox(
-                height: MediaHeight* 0.05,
+                height: MediaHeight * 0.05,
               ),
               SizedBox(
                 height: MediaHeight / 12,
@@ -183,7 +186,7 @@ class _welcomeState extends State<welcome> {
                       style: TextStyle(color: Colors.red),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, signUp.id);
+                      Navigator.pushNamed(context, SignUp.id);
                     },
                   ),
                 ],

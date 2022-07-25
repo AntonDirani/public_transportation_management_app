@@ -20,6 +20,7 @@ class TripsState extends State<Trips> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       extendBodyBehindAppBar: true,
       drawer: MyDrawer(),
       backgroundColor: Colors.white,

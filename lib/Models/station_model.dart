@@ -1,16 +1,14 @@
 import 'package:flutter/cupertino.dart';
 
-class Station extends ChangeNotifier{
-    int? id;
-    String? name;
-   double? lat;
-    double? lng;
-    int? time;
+class Station extends ChangeNotifier {
+  int? id;
+  String? name;
+  double? lat;
+  double? lng;
 
-   Station(
+  Station(
       {required this.id,
       required this.lat,
       required this.lng,
-      required this.name,
-      required this.time});
+      required this.name});
 }

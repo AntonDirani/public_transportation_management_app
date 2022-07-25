@@ -6,14 +6,14 @@ import 'package:pub_transport_01/Screens/add_trip.dart';
 import 'package:pub_transport_01/Screens/complaint.dart';
 import 'package:pub_transport_01/Screens/my_google_map.dart';
 import 'package:pub_transport_01/Screens/news.dart';
-import 'package:pub_transport_01/Screens/sign_up_page.dart';
-import 'package:pub_transport_01/Screens/welcome_page.dart';
+import 'package:pub_transport_01/Screens/sign_up.dart';
+import 'package:pub_transport_01/Screens/sign_in.dart';
 import 'package:pub_transport_01/validation/signin_validation.dart';
 import 'package:pub_transport_01/validation/signup_validation.dart';
 import 'API/news_api.dart';
 import 'Screens/trips.dart';
-import 'Screens/home_page.dart';
-import 'Screens/welcome_page.dart';
+import 'Screens/home_screen.dart';
+import 'Screens/sign_in.dart';
 import 'API/trips_api.dart';
 
 void main() => runApp(MyApp());
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           create: (context) => TripsAPI(),
         ),
         ChangeNotifierProvider(
-          create: (context) => signupValidation(),
+          create: (context) => SignUpProvider(),
         ),
         ChangeNotifierProvider(
           create: (context) => signinValidation(),
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
           add_trip.id: (context) => add_trip(),
           HomePage.id: (context) => HomePage(),
           welcome.id: (context) => welcome(),
-          signUp.id: (context) => signUp(),
+          SignUp.id: (context) => SignUp(),
           Trips.id: (context) => Trips(),
           //  TripDetails.id: (context) => TripDetails(),
           MyMap.id: (context) => MyMap(),

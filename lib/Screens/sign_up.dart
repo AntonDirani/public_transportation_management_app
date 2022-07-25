@@ -3,40 +3,79 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:pub_transport_01/validation/signup_validation.dart';
-import 'package:pub_transport_01/validation/validation_item.dart';
 
-class sign_up_page extends StatefulWidget {
-  const sign_up_page({Key? key}) : super(key: key);
+import '../Components/constants.dart';
 
+class SignUpScreen extends StatefulWidget {
   @override
-  State<sign_up_page> createState() => _sign_up_pageState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _sign_up_pageState extends State<sign_up_page> {
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.transparent,
-        body: signUp(),
+        body: SignUp(),
       ),
     );
   }
 }
 
-class signUp extends StatefulWidget {
-  const signUp({Key? key}) : super(key: key);
-  static String id = 'signUp';
+class SignUp extends StatefulWidget {
+  static String id = 'SignUp';
   @override
-  State<signUp> createState() => _signUpState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _signUpState extends State<signUp> {
+class _SignUpState extends State<SignUp> {
+  var _isloading = false;
   @override
   Widget build(BuildContext context) {
+    void showError(String message) {
+      showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+                title: Text('Something went wrong'),
+                content: Text(message),
+                actions: [
+                  MaterialButton(
+                      child: Text(
+                        'Okay',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      color: mainColor,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      }),
+                ],
+              ));
+    }
+
+    Future<void> _submit() async {
+      try {
+        setState(() {
+          _isloading = true;
+          print('n');
+        });
+
+        await Provider.of<SignUpProvider>(context, listen: false).signUp();
+      } catch (error) {
+        var message = ('Please try again later!');
+        showError(message);
+      }
+      setState(() {
+        _isloading = false;
+        print('d');
+      });
+    }
+
     var MediaHeight = MediaQuery.of(context).size.height;
     var MediaWidth = MediaQuery.of(context).size.width;
-    final validationServices = Provider.of<signupValidation>(context);
+    final validationServices = Provider.of<SignUpProvider>(context);
+    final validationServices1 =
+        Provider.of<SignUpProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -136,7 +175,7 @@ class _signUpState extends State<signUp> {
                           borderSide:
                               BorderSide(width: 2, color: Color(0xff33C58E))),
                       labelText: 'Password',
-                      errorText: validationServices.passeord.error,
+                      errorText: validationServices.password.error,
                       labelStyle: TextStyle(color: Colors.black),
                       prefixIcon: Icon(
                         Icons.lock,
@@ -205,21 +244,32 @@ class _signUpState extends State<signUp> {
                   SizedBox(
                     height: MediaHeight * 0.03,
                   ),
-                  SizedBox(
-                    height: MediaHeight / 11,
-                    width: double.infinity,
-                    child: RaisedButton(
-
-                      color: Color(0xff33C58E),
+                  if (_isloading)
+                    Center(
+                      child: CircularProgressIndicator(
+                        color: mainColor,
+                      ),
+                    )
+                  else
+                    MaterialButton(
+                      minWidth: double.infinity,
+                      color: mainColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
+                      height: MediaQuery.of(context).size.height / 12,
                       child: Text(
-                        'Sign Up',
-                        style: TextStyle(fontSize: 22, color: Colors.white),
+                        'Sign up now',
+                        style: GoogleFonts.montserrat(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w500),
                       ),
-                      onPressed: (!validationServices.isValid) ? null : validationServices.SubmitData,
+                      onPressed: (!validationServices1.isValid)
+                          ? null
+                          : () {
+                              _submit();
+                            },
                     ),
-                  ),
                 ],
               ),
             )

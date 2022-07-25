@@ -25,7 +25,10 @@ dependencies:
   email_validator: ^2.0.1
   flutter_svg: ^1.0.3
   intl: ^0.17.0
-  mirai_dropdown_menu: ^0.0.3
+  mirai_dropdown_menu:  ^0.0.6+1
+  font_awesome_flutter: ^10.1.0
+  http: ^0.13.4
+  dio: ^4.0.6
 dev_dependencies:
   flutter_test:
     sdk: flutter
