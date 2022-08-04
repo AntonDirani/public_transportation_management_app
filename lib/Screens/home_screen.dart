@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
                     'تطبيق إدارة و تنظيم حركة المواصلات العامة ضمن مدينة دمشق ',
                     style: GoogleFonts.cairo(
                       color: Colors.white,
-                      fontSize: 28,
+                      fontSize: 22,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -66,7 +66,7 @@ class HomePage extends StatelessWidget {
                       style: TextStyle(fontSize: 22),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, welcome.id);
+                      Navigator.pushNamed(context, SignInBody.id);
                     },
                   ),
                   MaterialButton(

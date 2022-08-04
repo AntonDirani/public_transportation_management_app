@@ -99,6 +99,7 @@ class SignUpProvider extends ChangeNotifier {
       final decoded = response.body;
       print(decoded);
     } catch (error) {
+      print(error);
       throw error;
     }
   }

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:pub_transport_01/validation/signup_validation.dart';
+import 'package:pub_transport_01/API/signup_api.dart';
 
 import '../Components/constants.dart';
 
@@ -76,9 +76,8 @@ class _SignUpState extends State<SignUp> {
     final validationServices = Provider.of<SignUpProvider>(context);
     final validationServices1 =
         Provider.of<SignUpProvider>(context, listen: false);
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
+    return Material(
+      child: SingleChildScrollView(
         child: Stack(
           children: [
             Container(

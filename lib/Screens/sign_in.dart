@@ -2,84 +2,116 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:pub_transport_01/Screens/sign_up.dart';
-import 'package:pub_transport_01/validation/signin_validation.dart';
+import 'package:pub_transport_01/API/signin_api.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+import '../Components/constants.dart';
 
-  @override
-  State<SignIn> createState() => _SignInState();
-}
-
-class _SignInState extends State<SignIn> {
+class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.transparent,
-        body: welcome(),
+        body: SignInBody(),
       ),
     );
   }
 }
 
-class welcome extends StatefulWidget {
-  const welcome({Key? key}) : super(key: key);
-  static String id = 'welcome_page';
+class SignInBody extends StatefulWidget {
+  const SignInBody({Key? key}) : super(key: key);
+  static String id = 'sign_in';
 
   @override
-  State<welcome> createState() => _welcomeState();
+  State<SignInBody> createState() => _SignInBodyState();
 }
 
-class _welcomeState extends State<welcome> {
+class _SignInBodyState extends State<SignInBody> {
+  var _isLoading = false;
+  void showError(String message) {
+    showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+              title: Text('Something went wrong'),
+              content: Text(message),
+              actions: [
+                MaterialButton(
+                    child: Text(
+                      'Okay',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    color: mainColor,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
+              ],
+            ));
+  }
+
+  Future<void> _login() async {
+    try {
+      setState(() {
+        _isLoading = true;
+      });
+
+      await Provider.of<SignInProvider>(context, listen: false).logIn();
+    } catch (error) {
+      var message = ('Please try again later!');
+      showError(message);
+    }
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   @override
   bool isPasswordVisible = true;
   String password = '';
   Widget build(BuildContext context) {
-    var MediaHeight = MediaQuery.of(context).size.height;
-    var MediaWidth = MediaQuery.of(context).size.width;
-    final validationServices = Provider.of<signinValidation>(context);
+    var mediaHeight = MediaQuery.of(context).size.height;
+    var mediaWidth = MediaQuery.of(context).size.width;
+    final validationServices = Provider.of<SignInProvider>(context);
 
     return Material(
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
         ),
         child: Padding(
           padding: EdgeInsets.only(
-              top: MediaHeight * 0.1,
-              left: MediaWidth * 0.07,
-              right: MediaWidth * 0.07),
+              top: mediaHeight * 0.1,
+              left: mediaWidth * 0.07,
+              right: mediaWidth * 0.07),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: MediaHeight / 4,
-                width: MediaWidth / 1.5,
-                decoration: BoxDecoration(
+                height: mediaHeight / 4,
+                width: mediaWidth / 1.5,
+                decoration: const BoxDecoration(
                     image:
                         DecorationImage(image: AssetImage('assets/Logo.png'))),
               ),
               SizedBox(
-                height: MediaHeight * 0.02,
+                height: mediaHeight * 0.02,
               ),
               Text(
                 'Welcome To Harakeh',
                 style: GoogleFonts.montserrat(
                     color: Colors.black,
-                    fontSize: 35,
+                    fontSize: mediaWidth * 0.06,
                     fontWeight: FontWeight.w600),
               ),
               SizedBox(
-                height: MediaHeight * 0.01,
+                height: mediaHeight * 0.01,
               ),
               Text(
-                'Getting Startd',
-                style:
-                    GoogleFonts.montserrat(color: Colors.black, fontSize: 20),
+                'Getting Started',
+                style: GoogleFonts.montserrat(
+                    color: Colors.black, fontSize: mediaWidth * 0.04),
               ),
               SizedBox(
-                height: MediaHeight * 0.03,
+                height: mediaHeight * 0.03,
               ),
               TextField(
                 decoration: InputDecoration(
@@ -105,7 +137,7 @@ class _welcomeState extends State<welcome> {
                 textInputAction: TextInputAction.done,
               ),
               SizedBox(
-                height: MediaHeight * 0.03,
+                height: mediaHeight * 0.03,
               ),
               TextField(
                 decoration: InputDecoration(
@@ -113,8 +145,8 @@ class _welcomeState extends State<welcome> {
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                       borderSide:
                           BorderSide(width: 2, color: Color(0xff33C58E))),
-                  labelText: 'Passwprd',
-                  errorText: validationServices.passeord.error,
+                  labelText: 'Password',
+                  errorText: validationServices.password.error,
                   suffixIcon: IconButton(
                     icon: isPasswordVisible
                         ? Icon(
@@ -144,46 +176,53 @@ class _welcomeState extends State<welcome> {
                 textInputAction: TextInputAction.done,
                 obscureText: isPasswordVisible,
               ),
-              // MaterialButton(
-              //   child: Text(
-              //     'Forgot Password ?',
-              //     style: TextStyle(color: Colors.red),
-              //   ),
-              //   onPressed: () {},
-              // ),
               SizedBox(
-                height: MediaHeight * 0.05,
+                height: mediaHeight * 0.05,
               ),
-              SizedBox(
-                height: MediaHeight / 12,
-                width: double.infinity,
-                child: RaisedButton(
-                  color: Color(0xff33C58E),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Text(
-                    'Sign in',
-                    style: TextStyle(fontSize: 22, color: Colors.white),
+              if (_isLoading)
+                Center(
+                  child: CircularProgressIndicator(
+                    color: mainColor,
                   ),
-                  onPressed: () {
-                    //Navigator.pushNamed(context, welcome.id);
-                  },
+                )
+              else
+                SizedBox(
+                  height: mediaHeight / 12,
+                  width: double.infinity,
+                  child: MaterialButton(
+                      minWidth: double.infinity,
+                      color: mainColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      height: MediaQuery.of(context).size.height / 12,
+                      child: Text(
+                        'Sign in now',
+                        style: GoogleFonts.montserrat(
+                            color: Colors.white,
+                            fontSize: mediaWidth * 0.05,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      onPressed: () {
+                        _login();
+                      }),
                 ),
-              ),
               SizedBox(
-                height: 45,
+                height: mediaWidth * 0.09,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Do not have an account?',
-                    style: TextStyle(fontSize: 14),
+                    'Don\'t have an account?',
+                    style: TextStyle(fontSize: mediaHeight * 0.015),
                   ),
-                  MaterialButton(
+                  TextButton(
                     child: Text(
                       'Sign Up Here',
-                      style: TextStyle(color: Colors.red),
+                      style: TextStyle(
+                        fontSize: mediaHeight * 0.015,
+                        color: Colors.red,
+                      ),
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, SignUp.id);
