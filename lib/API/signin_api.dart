@@ -3,6 +3,7 @@ import 'package:pub_transport_01/validation/validation_item.dart';
 import 'package:http/http.dart' as http;
 import 'package:pub_transport_01/Components/constants.dart';
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInProvider extends ChangeNotifier {
   String? _token;
@@ -60,7 +61,11 @@ class SignInProvider extends ChangeNotifier {
       );
       final body = response.body;
       final headers = response.headers;
-      _token = headers["x-access-token"]!;
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('token', headers["x-access-token"]!);
+      prefs.setBool('auth', true);
+      _token = await prefs.getString('token');
+      //_token = headers["x-access-token"]!;
       print(_token);
       notifyListeners();
     } catch (error) {
@@ -70,19 +75,27 @@ class SignInProvider extends ChangeNotifier {
   }
 
   bool get isAuth {
-    if (token != null) {
+    getData();
+    if (_token != null) {
       print('true');
       return true;
-    } else
+    } else {
+      print('false');
       return false;
+    }
   }
 
-  String? get token {
+  getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _token = await prefs.getString('token');
+  }
+
+  /* String? get token {
     if (_token != null) {
       return _token;
     }
     return null;
-  }
+  }*/
 
   void SubmitData() {
     print("${_email.value} , ${_password.value}");

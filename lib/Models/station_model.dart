@@ -6,9 +6,5 @@ class Station extends ChangeNotifier {
   double? lat;
   double? lng;
 
-  Station(
-      {required this.id,
-      required this.lat,
-      required this.lng,
-      required this.name});
+  Station({this.id, required this.lat, required this.lng, required this.name});
 }

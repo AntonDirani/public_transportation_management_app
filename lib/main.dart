@@ -10,6 +10,7 @@ import 'package:pub_transport_01/Screens/sign_in.dart';
 import 'package:pub_transport_01/API/signin_api.dart';
 import 'package:pub_transport_01/API/signup_api.dart';
 import 'API/news_api.dart';
+import 'Screens/trip_details.dart';
 import 'Screens/trips.dart';
 import 'Screens/home_screen.dart';
 import 'Screens/sign_in.dart';
@@ -51,8 +52,8 @@ class MyApp extends StatelessWidget {
             HomePage.id: (context) => HomePage(),
             SignInBody.id: (context) => SignInBody(),
             SignUp.id: (context) => SignUp(),
-            //Trips.id: (context) => Trips(),
-            //  TripDetails.id: (context) => TripDetails(),
+            Trips.id: (context) => Trips(),
+            // TripDetails.id: (context) => TripDetails(),
             MyMap.id: (context) => MyMap(),
             ComplaintScreen.id: (context) => ComplaintScreen(),
             NewsScreen.id: (context) => NewsScreen(),

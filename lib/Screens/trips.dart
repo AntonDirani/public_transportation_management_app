@@ -67,8 +67,9 @@ class _TripsBodyState extends State<TripsBody> {
   @override
   void initState() {
     super.initState();
-
-    trips = Provider.of<TripsAPI>(context, listen: false).allTrips;
+    final provider = Provider.of<TripsAPI>(context, listen: false);
+    trips = provider.allTrips;
+    provider.fetchProducts();
   }
 
   @override

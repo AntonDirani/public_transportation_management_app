@@ -4,6 +4,7 @@ class Trip {
   int? id;
   String? name;
   int? numBus;
+  List<int>? time;
   List<Station>? stations;
   int? numStations;
   List<int>? buses;
@@ -14,5 +15,6 @@ class Trip {
       this.buses,
       this.numBus,
       this.numStations,
+      this.time,
       this.stations});
 }
