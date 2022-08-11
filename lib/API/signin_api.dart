@@ -36,10 +36,11 @@ class SignInProvider extends ChangeNotifier {
   }
 
   void changePassword(String value) {
-    if (value.length >= 6) {
+    if (value.length >= 8) {
       _password = validationItem(value, null);
     } else {
-      _password = validationItem(null, "Invalid input!");
+      _password =
+          validationItem(null, "Password should be 8 characters at least!");
     }
     notifyListeners();
   }

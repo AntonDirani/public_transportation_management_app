@@ -17,4 +17,9 @@ class Trip {
       this.numStations,
       this.time,
       this.stations});
+
+  @override
+  String toString() {
+    return 'Trip{name: $name}';
+  }
 }

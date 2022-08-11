@@ -63,9 +63,12 @@ class NewsDetailsBody extends StatelessWidget {
           SizedBox(
             height: 15,
           ),
-          Text(news.content!,
-              style: GoogleFonts.montserrat(
-                  fontSize: 18, fontWeight: FontWeight.w300))
+          Padding(
+            padding: EdgeInsets.fromLTRB(12, 0, 12, 10),
+            child: Text(news.content!,
+                style: GoogleFonts.montserrat(
+                    fontSize: 18, fontWeight: FontWeight.w300)),
+          )
         ],
       ),
     );

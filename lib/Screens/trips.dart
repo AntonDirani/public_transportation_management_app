@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:pub_transport_01/Components/constants.dart';
 import 'package:pub_transport_01/Components/my_drawer.dart';
 import 'package:pub_transport_01/Screens/trip_details.dart';
 import 'package:pub_transport_01/Models/trips_model.dart';
@@ -67,13 +68,21 @@ class _TripsBodyState extends State<TripsBody> {
   @override
   void initState() {
     super.initState();
-    final provider = Provider.of<TripsAPI>(context, listen: false);
-    trips = provider.allTrips;
-    provider.fetchProducts();
+    Provider.of<TripsAPI>(context, listen: false).fetchProducts();
+
+    trips = Provider.of<TripsAPI>(context, listen: false).allTrips;
+  }
+
+  @override
+  void didChangeDependencies() {
+    trips = Provider.of<TripsAPI>(context, listen: true).allTrips;
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context1) {
+    //List trips = Provider.of<TripsAPI>(context, listen: true).allTrips;
+
     return Column(
       children: [
         Stack(
@@ -109,21 +118,27 @@ class _TripsBodyState extends State<TripsBody> {
         SizedBox(
           height: 15,
         ),
-        Expanded(
-          //Listview
-          child: MediaQuery.removePadding(
-            context: context,
-            removeTop: true,
-            child: ListView.builder(
-              //shrinkWrap: true,
-              itemCount: trips.length,
-              itemBuilder: (context, index) {
-                final trip = trips[index];
-                return buildTrip(trip, context1, index);
-              },
-            ),
-          ),
-        ),
+        trips.isEmpty
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: mainColor,
+                ),
+              )
+            : Expanded(
+                //Listview
+                child: MediaQuery.removePadding(
+                  context: context,
+                  removeTop: true,
+                  child: ListView.builder(
+                    //shrinkWrap: true,
+                    itemCount: trips.length,
+                    itemBuilder: (context, index) {
+                      final trip = trips[index];
+                      return buildTrip(trip, context1, index);
+                    },
+                  ),
+                ),
+              ),
       ],
     );
   }

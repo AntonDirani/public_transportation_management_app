@@ -3,7 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pub_transport_01/Screens/complaint.dart';
 import 'package:pub_transport_01/Screens/news.dart';
+import 'package:pub_transport_01/Screens/sign_in.dart';
 import 'package:pub_transport_01/Screens/trips.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Screens/my_google_map.dart';
 import 'constants.dart';
 
@@ -83,6 +85,22 @@ class MyDrawer extends StatelessWidget {
                     fontSize: 18, fontWeight: FontWeight.w500)),
             onTap: () {
               Navigator.pushReplacementNamed(context, NewsScreen.id);
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.logout,
+              size: mediaSize.width / 11,
+              color: mainColor,
+            ),
+            subtitle: Text('Sign in with different account'),
+            title: Text('Log out',
+                style: GoogleFonts.montserrat(
+                    fontSize: 18, fontWeight: FontWeight.w500)),
+            onTap: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.clear();
+              Navigator.pushReplacementNamed(context, SignIn.id);
             },
           ),
         ],

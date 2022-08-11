@@ -66,7 +66,7 @@ class HomePage extends StatelessWidget {
                       style: TextStyle(fontSize: 22),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, SignInBody.id);
+                      //Navigator.pushNamed(context, SignIn.id);
                     },
                   ),
                   MaterialButton(

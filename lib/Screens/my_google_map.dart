@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
+import 'package:provider/provider.dart';
 import 'package:pub_transport_01/Components/constants.dart';
 import 'package:geolocator/geolocator.dart';
+
+import '../API/trips_api.dart';
 
 class MyMap extends StatefulWidget {
   static String id = 'my_google_map';
@@ -15,12 +18,20 @@ class MyMap extends StatefulWidget {
 class _MyMapState extends State<MyMap> {
   late GoogleMapController googleMapController;
   late BitmapDescriptor customMarker;
-
+  Set<Marker> loadedMarkers = {};
   @override
   void initState() {
     setMarker();
+    //Provider.of<TripsAPI>(context, listen: false).loadStations();
+    load();
 
     super.initState();
+  }
+
+  Future<void> load() async {
+    loadedMarkers =
+        await Provider.of<TripsAPI>(context, listen: false).allMarkers;
+    print(loadedMarkers);
   }
 
   setMarker() async {
@@ -30,52 +41,18 @@ class _MyMapState extends State<MyMap> {
     );
   }
 
+  @override
+  void didChangeDependencies() {
+    // _markers = loadedMarkers;
+    super.didChangeDependencies();
+  }
+
   void _onMapCreate(GoogleMapController controller) {
     setState(() {
-      _markers = {
-        Marker(
-          icon: customMarker,
-          infoWindow:
-              InfoWindow(title: 'محطة باب توما', snippet: 'Bab Touma Station'),
-          markerId: MarkerId('0'),
-          position: LatLng(33.51380897904905, 36.31589383497151),
-        ),
-        Marker(
-          icon: customMarker,
-          infoWindow:
-              InfoWindow(title: 'محطة باب شرقي', snippet: 'Bab Sharqi Station'),
-          markerId: MarkerId('1'),
-          position: LatLng(33.50918623023591, 36.31814665426697),
-        ),
-        Marker(
-          icon: customMarker,
-          infoWindow: InfoWindow(
-              title: 'محطة ساحة التحرير', snippet: 'Tahrir Square Station'),
-          markerId: MarkerId('2'),
-          position: LatLng(33.518291560995664, 36.31207436842789),
-        ),
-        Marker(
-          icon: customMarker,
-          infoWindow: InfoWindow(
-              title: 'محطة شارع بغداد', snippet: 'Baghdad Ave Station'),
-          markerId: MarkerId('3'),
-          position: LatLng(33.51997836180592, 36.300852817269835),
-        ),
-        Marker(
-          icon: customMarker,
-          infoWindow: InfoWindow(
-              title: 'محطة العباسيين', snippet: 'Abbassiyyin Square Station'),
-          markerId: MarkerId('4'),
-          position: LatLng(33.52363263282213, 36.31847255041357),
-        ),
-        Marker(
-          icon: customMarker,
-          infoWindow:
-              InfoWindow(title: 'محطة الزبلطاني', snippet: 'Zablatani Station'),
-          markerId: MarkerId('5'),
-          position: LatLng(33.51694168672946, 36.32042731856238),
-        )
-      };
+      for (var e in loadedMarkers) {
+        _markers.add(e);
+      }
+      print(_markers);
     });
   }
 
@@ -86,7 +63,7 @@ class _MyMapState extends State<MyMap> {
       ),
       zoom: 14.2);
 
-  Set<Marker> _markers = {};
+  final Set<Marker> _markers = {};
 
   /*void _onMapCreate(GoogleMapController controller) {
     setState(() {

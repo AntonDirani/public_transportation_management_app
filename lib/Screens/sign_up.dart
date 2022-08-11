@@ -3,33 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:pub_transport_01/API/signup_api.dart';
+import 'package:pub_transport_01/Screens/sign_in.dart';
 
 import '../Components/constants.dart';
 
 class SignUpScreen extends StatefulWidget {
+  static String id = 'SignUp';
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SignUp(),
-      ),
-    );
-  }
-}
-
-class SignUp extends StatefulWidget {
-  static String id = 'SignUp';
-  @override
-  State<SignUp> createState() => _SignUpState();
-}
-
-class _SignUpState extends State<SignUp> {
   var _isloading = false;
   @override
   Widget build(BuildContext context) {
@@ -61,13 +45,13 @@ class _SignUpState extends State<SignUp> {
         });
 
         await Provider.of<SignUpProvider>(context, listen: false).signUp();
+        Navigator.pushReplacementNamed(context, SignIn.id);
       } catch (error) {
         var message = ('Please try again later!');
         showError(message);
       }
       setState(() {
         _isloading = false;
-        print('d');
       });
     }
 
@@ -76,8 +60,9 @@ class _SignUpState extends State<SignUp> {
     final validationServices = Provider.of<SignUpProvider>(context);
     final validationServices1 =
         Provider.of<SignUpProvider>(context, listen: false);
-    return Material(
-      child: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
         child: Stack(
           children: [
             Container(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:pub_transport_01/API/complaint_api.dart';
 import 'package:pub_transport_01/Components/constants.dart';
 import 'package:pub_transport_01/Screens/complaint.dart';
 import 'package:pub_transport_01/Screens/my_google_map.dart';
@@ -10,6 +11,7 @@ import 'package:pub_transport_01/Screens/sign_in.dart';
 import 'package:pub_transport_01/API/signin_api.dart';
 import 'package:pub_transport_01/API/signup_api.dart';
 import 'API/news_api.dart';
+import 'Screens/SplashScreen.dart';
 import 'Screens/trip_details.dart';
 import 'Screens/trips.dart';
 import 'Screens/home_screen.dart';
@@ -23,6 +25,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<ComplaintsAPI>(
+            create: (context) => ComplaintsAPI()),
         ChangeNotifierProvider<SignInProvider>(
           create: (context) => SignInProvider(),
         ),
@@ -47,11 +51,11 @@ class MyApp extends StatelessWidget {
               colorScheme:
                   ColorScheme.fromSwatch().copyWith(secondary: mainColor)),
           debugShowCheckedModeBanner: false,
-          home: auth.isAuth ? Trips() : HomePage(),
+          home: auth.isAuth ? Trips() : SplashScreen(),
           routes: {
             HomePage.id: (context) => HomePage(),
-            SignInBody.id: (context) => SignInBody(),
-            SignUp.id: (context) => SignUp(),
+            SignUpScreen.id: (context) => SignUpScreen(),
+            SignIn.id: (context) => SignIn(),
             Trips.id: (context) => Trips(),
             // TripDetails.id: (context) => TripDetails(),
             MyMap.id: (context) => MyMap(),
