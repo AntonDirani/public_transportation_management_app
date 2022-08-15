@@ -68,8 +68,14 @@ class _NewsBodyState extends State<NewsBody> {
   @override
   void initState() {
     super.initState();
-
+    Provider.of<NewsAPI>(context, listen: false).fetchNews();
     news = Provider.of<NewsAPI>(context, listen: false).allNews;
+  }
+
+  @override
+  void didChangeDependencies() {
+    news = Provider.of<NewsAPI>(context, listen: true).allNews;
+    super.didChangeDependencies();
   }
 
   @override

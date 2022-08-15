@@ -149,7 +149,7 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
                       key: UniqueKey(),
                       children: trips,
                       space: 4,
-                      maxHeight: 300,
+                      maxHeight: 230,
                       showSearchTextField: true,
                       itemWidgetBuilder: (int index, Trip trip) {
                         return DropDownItemWidget(trip: trip);

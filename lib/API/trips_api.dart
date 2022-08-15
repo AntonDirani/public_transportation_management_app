@@ -13,7 +13,7 @@ class TripsAPI extends ChangeNotifier {
   Set<Marker> allMarkers = {};
 
   List<Trip> allTrips = [
-    Trip(
+    /*Trip(
         name: 'Bab Touma, Abbaseen, Baghdad, Tahreer',
         id: 1,
         buses: [2, 3, 7, 5, 6],
@@ -138,7 +138,7 @@ class TripsAPI extends ChangeNotifier {
             lng: 36.31589383497151,
             name: 'Tahreer',
           ),
-        ]),
+        ]),*/
   ];
 
   String? _token;
@@ -154,7 +154,7 @@ class TripsAPI extends ChangeNotifier {
         'X-ACCESS-TOKEN': '$_token'
       });
       final data = jsonDecode(response.body) as List<dynamic>;
-
+      final List<Trip> loadedTrips = [];
       for (int i = 0; i < data.length; i++) {
         final List<Station> loadedStations = [];
         final decoded = data[i]['stations'];
@@ -164,7 +164,7 @@ class TripsAPI extends ChangeNotifier {
               lng: decoded[j]['lng'],
               name: decoded[j]['name']));
         }
-        allTrips.add(Trip(
+        loadedTrips.add(Trip(
             name: data[i]['name'],
             buses: data[i]['BusesId'].cast<int>(),
             numBus: data[i]['numBuses'],
@@ -173,6 +173,7 @@ class TripsAPI extends ChangeNotifier {
             stations: loadedStations));
         print(data[i]['stations'].length);
       }
+      allTrips = loadedTrips;
       await setMarker();
       await loadStations();
       notifyListeners();

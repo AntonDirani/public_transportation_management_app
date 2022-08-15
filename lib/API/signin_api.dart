@@ -47,7 +47,7 @@ class SignInProvider extends ChangeNotifier {
 
   Future<void> logIn() async {
     try {
-      var url = Url + 'login';
+      var url = Url + 'login/User';
       final http.Response response = await http.post(
         Uri.parse(url),
         headers: {

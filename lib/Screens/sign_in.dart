@@ -41,6 +41,7 @@ class _SignInState extends State<SignIn> {
       });
 
       await Provider.of<SignInProvider>(context, listen: false).logIn();
+      /* showError(response!);*/
     } catch (error) {
       var message = ('Please try again later!');
       showError(message);
@@ -62,6 +63,7 @@ class _SignInState extends State<SignIn> {
         resizeToAvoidBottomInset: true,
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Container(
             child: Padding(
               padding: EdgeInsets.only(
